@@ -23,9 +23,10 @@ $app = new Laravel\Lumen\Application(
     dirname(__DIR__)
 );
 
-// $app->withFacades();
+ $app->withFacades();
 
 $app->withEloquent();
+
 
 /*
 |--------------------------------------------------------------------------
@@ -37,16 +38,16 @@ $app->withEloquent();
 | your own bindings here if you like or you can make another file.
 |
 */
-
-$app->singleton(
-    Illuminate\Contracts\Debug\ExceptionHandler::class,
-    App\Exceptions\Handler::class
-);
-
-$app->singleton(
-    Illuminate\Contracts\Console\Kernel::class,
-    App\Console\Kernel::class
-);
+//
+//$app->singleton(
+//    Illuminate\Contracts\Debug\ExceptionHandler::class,
+//    App\Exceptions\Handler::class
+//);
+//
+//$app->singleton(
+//    Illuminate\Contracts\Console\Kernel::class,
+//    App\Console\Kernel::class
+//);
 
 /*
 |--------------------------------------------------------------------------
@@ -59,8 +60,10 @@ $app->singleton(
 |
 */
 
-$app->configure('app');
+//$app->configure('auth');
 
+$app->configure('services');
+$app->configure('mail');
 /*
 |--------------------------------------------------------------------------
 | Register Middleware
@@ -72,9 +75,9 @@ $app->configure('app');
 |
 */
 
-// $app->middleware([
-//     App\Http\Middleware\ExampleMiddleware::class
-// ]);
+ $app->middleware([
+     App\Http\Middleware\ExampleMiddleware::class
+ ]);
 
 // $app->routeMiddleware([
 //     'auth' => App\Http\Middleware\Authenticate::class,
@@ -91,11 +94,13 @@ $app->configure('app');
 |
 */
 
-// $app->register(App\Providers\AppServiceProvider::class);
-// $app->register(App\Providers\AuthServiceProvider::class);
-// $app->register(App\Providers\EventServiceProvider::class);
-$app->register(Flipbox\LumenGenerator\LumenGeneratorServiceProvider::class);
-
+ $app->register(App\Providers\AppServiceProvider::class);
+ $app->register(\Illuminate\Auth\Passwords\PasswordResetServiceProvider::class);
+ $app->register(\Illuminate\Mail\MailServiceProvider::class);
+ $app->register(Illuminate\Notifications\NotificationServiceProvider::class);
+ // $app->register(App\Providers\AuthServiceProvider::class);
+ // $app->register(App\Providers\EventServiceProvider::class);
+ // $app->register(Flipbox\LumenGenerator\LumenGeneratorServiceProvider::class);
 
 /*
 |--------------------------------------------------------------------------
