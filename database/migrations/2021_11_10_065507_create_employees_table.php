@@ -23,7 +23,7 @@ class CreateEmployeesTable extends Migration
             $table->string('password');
             $table->enum('sex',['male','female']);
             $table->string('image');
-            $table->string('employee_token')->nullable();
+            $table->rememberToken();
             $table->string('referred_by')->nullable();
             $table->string('referral_link')->nullable();
             $table->boolean('conditions_accepted')->default(0);

@@ -1,5 +1,9 @@
 <?php
 
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Password;
+use Illuminate\Support\Facades\Route;
+
 /** @var \Laravel\Lumen\Routing\Router $router */
 
 /*
@@ -21,21 +25,10 @@ $router->group(['prefix' => 'api'], function () use ($router){
     $router->put('/employee/{id}', 'EmployeeController@update');
     $router->delete('/employee/{id}', 'EmployeeController@delete');
 
-
-    /*
-                    // Email Changing //
-    $router->patch('/employee/{id}/edit', 'EmployeeController@emailChange');
-*/
                     // Password Reset //
-//    $router->patch('/employee/{id}', 'EmployeeController@passwordReset');
+    $router->get('/send-email','EmployeeController@sendEmail');
+    $router->post('/forgot-password','EmployeeController@sendResetLinkResponse');
 
-//    $app->post('/password/email', 'PasswordController@postEmail');
-//    $app->post('/password/reset/{token}', 'PasswordController@postReset');
-
-
-                    // Login Auth //
-
-//    $router->get('/employee/login', 'EmployeeController@login');
 
 
 });

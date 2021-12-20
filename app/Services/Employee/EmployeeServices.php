@@ -4,14 +4,22 @@ namespace App\Services\Employee;
 
 use App\Models\Employee;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Auth\Events\PasswordReset;
+use Illuminate\Support\Facades\Password;
+use Illuminate\Support\Str;
+use Illuminate\Validation\Rules\Password as RulesPassword;
 use Illuminate\Http\File;
 use Aliftech\Core\Core;
 
 
 class EmployeeServices
 {
+
     public function __construct(
         public Core $core
     )
@@ -156,19 +164,22 @@ class EmployeeServices
 //        return response()->json($data);
 //    }
 
-    /// Password Reset of EmployeeServices ///
-    public function PasswordReset($request,$id)
+    /// MailSender of EmployeeServices ///
+    public function sendEmail()
     {
-        try{
-            $employee = Employee::findOrFail($id);
-            $employee->password = $request->password;
-            if ($employee->save()){
-                return response()->json(['status'=>'success', 'message' => 'Post Updated successfull']);
-            }
-        }catch (\Exception $e){
-            return response()->json(['status'=>'error', 'message' => $e->getMessage()]);
+        Mail::raw('This is the body', function ($message) {
+            $message->to('sherikshaxe@gmail.com')->subject( 'Testing Email');
+        });
+
+        if (Mail::failures()) {
+            return 'Извините! Повторите попытку позже :(';
+        }else{
+            return 'Отлично! Электронное письмо успешно отправлено;) ';
         }
+
     }
+    /// Password Reset of EmployeeServices ///
+
 
     /// Phone Num Change of EmployeeServices ///
     public function changePhone($request,$id)

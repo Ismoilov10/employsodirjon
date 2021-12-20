@@ -14,7 +14,8 @@ return [
     */
 
     'defaults' => [
-        'guard' => env('AUTH_GUARD', 'api'),
+        'guard' => 'web',
+        'passwords' => 'employees',
     ],
 
     /*
@@ -56,7 +57,7 @@ return [
     */
 
     'providers' => [
-        'users' => [
+        'employees' => [
             'driver' => 'eloquent',
             'model' => App\Models\Employee::class,
         ],
@@ -82,13 +83,13 @@ return [
     */
 
     'passwords' => [
-        'employee' => [
-            'provider' => 'employee',
-            'table' => 'passwords_resets',
+        'employees' => [
+            'provider' => 'employees',
+            'email' => 'auth.emails.password',
+            'table' => 'password_resets',
             'expire' => 60,
             'throttle' => 60,
         ],
-    ],
-    'password_timeout' => 10800,
+    ]
 
 ];

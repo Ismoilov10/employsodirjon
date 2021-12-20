@@ -25,7 +25,7 @@ $app = new Laravel\Lumen\Application(
 
  $app->withFacades();
 
-$app->withEloquent();
+ $app->withEloquent();
 
 
 /*
@@ -39,15 +39,15 @@ $app->withEloquent();
 |
 */
 //
-//$app->singleton(
-//    Illuminate\Contracts\Debug\ExceptionHandler::class,
-//    App\Exceptions\Handler::class
-//);
-//
-//$app->singleton(
-//    Illuminate\Contracts\Console\Kernel::class,
-//    App\Console\Kernel::class
-//);
+$app->singleton(
+    Illuminate\Contracts\Debug\ExceptionHandler::class,
+    App\Exceptions\Handler::class
+);
+
+$app->singleton(
+    Illuminate\Contracts\Console\Kernel::class,
+    App\Console\Kernel::class
+);
 
 /*
 |--------------------------------------------------------------------------
@@ -98,9 +98,8 @@ $app->configure('mail');
  $app->register(\Illuminate\Auth\Passwords\PasswordResetServiceProvider::class);
  $app->register(\Illuminate\Mail\MailServiceProvider::class);
  $app->register(Illuminate\Notifications\NotificationServiceProvider::class);
- // $app->register(App\Providers\AuthServiceProvider::class);
- // $app->register(App\Providers\EventServiceProvider::class);
- // $app->register(Flipbox\LumenGenerator\LumenGeneratorServiceProvider::class);
+ $app->register(App\Providers\AuthServiceProvider::class);
+ $app->register(App\Providers\EventServiceProvider::class);
 
 /*
 |--------------------------------------------------------------------------
